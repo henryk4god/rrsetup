@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        EDIT: Change the title below to your restaurant name 
+    -->
+    <title>Michyrite Bites Restaurant | Authentic Nigerian Cuisine</title>
+    
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* 
+                EDIT: Customize your restaurant's color scheme here
+                Change these color values to match your brand
+            */
+            --primary-color: #d4af37;      /* Gold */
+            --secondary-color: #1a1a1a;    /* Dark background */
+            --accent-color: #ff6b6b;       /* Red accent */
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --overlay: rgba(0, 0, 0, 0.7);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+        
+        /* ===== NAVIGATION BAR ===== */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: var(--secondary-color);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* 
+            EDIT: Change your restaurant logo text below in the HTML
+            The styling is controlled here
+        */
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        /* ===== HERO SECTION (HOME) ===== */
+        #home {
+            /* 
+                EDIT: Replace the background image URL below with your own
+                Use a high-quality image of your restaurant or signature dish
+                Recommended size: 1920x1080px or larger
+            */
+            background: linear-gradient(var(--overlay), var(--overlay)),
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            padding-top: 70px;
+        }
+        
+        .hero-content h1 {
+            /* 
+                EDIT: Change the main headline in the HTML below
+            */
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-content p {
+            /* 
+                EDIT: Change the subtitle in the HTML below
+            */
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+        
+        /* ===== TELEGRAM BOT BUTTON ===== */
+        .telegram-btn {
+            /* 
+                EDIT: This is your main call-to-action button
+                Link it to your Telegram bot in the HTML
+            */
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease 0.6s backwards;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .telegram-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+        }
+        
+        /* ===== SECTION STYLES ===== */
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 1rem auto;
+        }
+        
+        /* ===== ABOUT US SECTION ===== */
+        #about {
+            background: #f9f9f9;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            /* 
+                EDIT: Customize your about section heading and text in HTML
+            */
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            /* 
+                EDIT: Replace with an image of your restaurant interior or chef
+            */
+            background: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800') center/cover;
+            height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* ===== CONTACT SECTION ===== */
+        #contact {
+            background: var(--secondary-color);
+            color: var(--text-light);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .contact-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item h3 {
+            /* 
+                EDIT: Update contact information in the HTML
+            */
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ===== FAQ SECTION ===== */
+        #faq {
+            background: #fff;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            /* 
+                EDIT: Add or remove FAQ items in the HTML
+                Customize questions and answers for your restaurant
+            */
+            background: #f9f9f9;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            opacity: 0.9;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 300px;
+        }
+        
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--secondary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--secondary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ===== NAVIGATION BAR ===== -->
+    <nav>
+        <div class="container">
+            <!-- 
+                EDIT: Change "Michyrite Bites" to your restaurant name
+            -->
+            <a href="#home" class="logo">🍽️ Michyrite Bites</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- ===== HOME/HERO SECTION ===== -->
+    <section id="home">
+        <div class="hero-content">
+            <!-- 
+                EDIT: Customize your headline and tagline below
+            -->
+            <h1>Welcome to Michyrite Bites Restaurant</h1>
+            <p>Authentic Nigerian Cuisine in the Heart of the City</p>
+            
+            <!-- 
+                EDIT IMPORTANT: Replace the href with your actual Telegram bot link
+                Format: https://t.me/ritarest2bot
+            -->
+            <a href="https://t.me/your_restaurant_bot" class="telegram-btn" target="_blank">
+                📱 Order Now via Telegram
+            </a>
+        </div>
+    </section>
+    
+    <!-- ===== ABOUT US SECTION ===== -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <!-- 
+                        EDIT: Write your restaurant's story here
+                        Include your history, philosophy, and what makes you special
+                    -->
+                    <h3>Our Story</h3>
+                    <p>
+                        Since 1985, Michyrite Bites has been serving authentic Nigerian cuisine 
+                        with passion and dedication. Our family recipes have been passed down 
+                        through generations, bringing the true taste of Nigeria to your table.
+                    </p>
+                    <p>
+                        We use only the finest ingredients, sourced locally when possible, 
+                        and imported from overseas to ensure authenticity. Our chefs prepare 
+                        each dish with love and attention to detail, just like Nonna used to make.
+                    </p>
+                    <p>
+                        Whether you're celebrating a special occasion or simply enjoying a 
+                        meal with loved ones, we promise an unforgettable dining experience.
+                    </p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--text-light);">Contact Us</h2>
+            <div class="contact-grid">
+                <!-- 
+                    EDIT: Update all contact information below with your actual details
+                -->
+                <div class="contact-item">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📍</div>
+                    <h3>Location</h3>
+                    <p>4 Connal Road, Yaba <br>Lagos, NG 100011</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📞</div>
+                    <h3>Phone</h3>
+                    <p>+2348033867642</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📧</div>
+                    <h3>Email</h3>
+                    <p>ritak4god.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🕒</div>
+                    <h3>Hours</h3>
+                    <p>Mon-Fri: 11am - 10pm<br>Sat-Sun: 10am - 11pm</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===== FAQ SECTION ===== -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <!-- 
+                    EDIT: Add, remove, or modify FAQ items below
+                    Each FAQ needs a .faq-item div with .faq-question and .faq-answer
+                -->
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I place an order through Telegram?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Simply click the "Order Now via Telegram" button, and our bot will guide you through the menu. You can browse dishes, customize your order, and complete payment securely through the bot.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer delivery?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer delivery within a 5-mile radius. Delivery fee is N5, and orders over N50 get free delivery. You can track your order in real-time through our Telegram bot.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards, debit cards, and digital payment methods through our secure Telegram bot payment system.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you accommodate dietary restrictions?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We offer vegetarian, vegan, and gluten-free options. Please mention your dietary requirements when ordering through our Telegram bot, and we'll accommodate your needs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I make reservations for dine-in?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can make reservations by contacting us via phone or through our Telegram bot. We recommend booking in advance, especially for weekends and special occasions.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <!-- 
+                EDIT: Update footer text with your restaurant name and year
+            -->
+            <p>&copy; 2025 Michyrite Bites Restaurant. All rights reserved.</p>
+            <p>Made with ❤️ for food lovers everywhere</p>
+        </div>
+    </footer>
+    
+    <!-- ===== JAVASCRIPT FOR INTERACTIVE FEATURES ===== -->
+    <script>
+        // Mobile menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // FAQ accordion functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Smooth scroll offset for fixed navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
